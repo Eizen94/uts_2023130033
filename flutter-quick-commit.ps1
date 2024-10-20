@@ -5,6 +5,9 @@ param(
     [string]$CommitMessage
 )
 
+# Define the path to Flutter
+$flutterPath = "C:\Users\Nikolaus Franz\OneDrive\Documents\flutter\bin\flutter.bat"
+
 # Check if we're in a Flutter project
 if (-not (Test-Path pubspec.yaml)) {
     Write-Error "Not a Flutter project. Please run this script from the root of your Flutter project."
@@ -19,11 +22,11 @@ if (-not (Test-Path .git)) {
 
 # Run Flutter format
 Write-Host "Running Flutter format..." -ForegroundColor Cyan
-flutter format .
+& $flutterPath format .
 
 # Run Flutter analyze
 Write-Host "Running Flutter analyze..." -ForegroundColor Cyan
-$analyzeResult = flutter analyze
+$analyzeResult = & $flutterPath analyze
 if ($LASTEXITCODE -ne 0) {
     Write-Warning "Flutter analyze found issues. Please review and fix before committing."
     Write-Output $analyzeResult
