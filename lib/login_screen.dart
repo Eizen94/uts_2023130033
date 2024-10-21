@@ -32,115 +32,132 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         child: SafeArea(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Container(
-                  height: 280,
-                  color: Colors.white.withOpacity(0.3),
-                  child: const Center(
-                    child: Text(
-                      'Logo',
-                      style: TextStyle(color: Colors.white, fontSize: 24),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 24),
-                const Text(
-                  'Login',
-                  style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 24.0),
-                TextField(
-                  controller: _usernameController,
-                  decoration: InputDecoration(
-                    hintText: 'Username',
-                    prefixIcon: const Icon(Icons.person, color: Colors.white),
-                    filled: true,
-                    fillColor: Colors.white.withOpacity(0.3),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      borderSide: BorderSide.none,
-                    ),
-                    hintStyle: const TextStyle(color: Colors.white70),
-                  ),
-                  style: const TextStyle(color: Colors.white),
-                ),
-                const SizedBox(height: 16.0),
-                TextField(
-                  controller: _passwordController,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    hintText: 'Password',
-                    prefixIcon: const Icon(Icons.lock, color: Colors.white),
-                    filled: true,
-                    fillColor: Colors.white.withOpacity(0.3),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      borderSide: BorderSide.none,
-                    ),
-                    hintStyle: const TextStyle(color: Colors.white70),
-                  ),
-                  style: const TextStyle(color: Colors.white),
-                ),
-                const SizedBox(height: 24.0),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                          builder: (context) => const HomeScreen()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: const Color(0xFF7C4DFF),
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                  ),
-                  child: const Text('Login', style: TextStyle(fontSize: 16)),
-                ),
-                const SizedBox(height: 16.0),
-                TextButton(
-                  onPressed: () {
-                    // Mengimplementasi fungsionalitas lupa password
-                  },
-                  child: const Text(
-                    'Forgot your password?',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-                const SizedBox(height: 24.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'Don\'t have an account?',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        // Mengimplementasikan fungsionallitas Sign Up
-                      },
-                      child: const Text(
-                        'Sign up',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minHeight: MediaQuery.of(context).size.height -
+                    MediaQuery.of(context).padding.top -
+                    MediaQuery.of(context).padding.bottom,
+              ),
+              child: IntrinsicHeight(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Column(
+                        children: [
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.3,
+                            color: Colors.white.withOpacity(0.3),
+                            child: const Center(
+                              child: Text(
+                                'Logo',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 24),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 24),
+                          const Text(
+                            'Login',
+                            style: TextStyle(
+                              fontSize: 32,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 24.0),
+                          TextField(
+                            controller: _usernameController,
+                            decoration: InputDecoration(
+                              hintText: 'Username',
+                              prefixIcon:
+                                  const Icon(Icons.person, color: Colors.white),
+                              filled: true,
+                              fillColor: Colors.white.withOpacity(0.3),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30),
+                                borderSide: BorderSide.none,
+                              ),
+                              hintStyle: const TextStyle(color: Colors.white70),
+                            ),
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                          const SizedBox(height: 16.0),
+                          TextField(
+                            controller: _passwordController,
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              hintText: 'Password',
+                              prefixIcon:
+                                  const Icon(Icons.lock, color: Colors.white),
+                              filled: true,
+                              fillColor: Colors.white.withOpacity(0.3),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30),
+                                borderSide: BorderSide.none,
+                              ),
+                              hintStyle: const TextStyle(color: Colors.white70),
+                            ),
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                          const SizedBox(height: 24.0),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => const HomeScreen()),
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                              foregroundColor: Colors.white,
+                              backgroundColor: const Color(0xFF7C4DFF),
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                            ),
+                            child: const Text('Login',
+                                style: TextStyle(fontSize: 16)),
+                          ),
+                          const SizedBox(height: 16.0),
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text(
+                              'Forgot your password?',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 24.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              'Don\'t have an account?',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            TextButton(
+                              onPressed: () {},
+                              child: const Text(
+                                'Sign up',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ],
+              ),
             ),
           ),
         ),
