@@ -43,9 +43,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 Text(
                   'Login',
                   style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                    color: Theme.of(context).colorScheme.onPrimaryContainer,
-                    fontWeight: FontWeight.bold,
-                  ),
+                        color: Theme.of(context).colorScheme.onPrimaryContainer,
+                        fontWeight: FontWeight.bold,
+                      ),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 48.0),
@@ -53,9 +53,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   controller: _usernameController,
                   decoration: InputDecoration(
                     hintText: 'Username',
-                    prefixIcon: Icon(Icons.person, color: Theme.of(context).colorScheme.onPrimaryContainer),
+                    prefixIcon: Icon(Icons.person,
+                        color:
+                            Theme.of(context).colorScheme.onPrimaryContainer),
                     filled: true,
-                    fillColor: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3),
+                    fillColor: Theme.of(context)
+                        .colorScheme
+                        .primaryContainer
+                        .withOpacity(0.3),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                       borderSide: BorderSide.none,
@@ -68,9 +73,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   obscureText: true,
                   decoration: InputDecoration(
                     hintText: 'Password',
-                    prefixIcon: Icon(Icons.lock, color: Theme.of(context).colorScheme.onPrimaryContainer),
+                    prefixIcon: Icon(Icons.lock,
+                        color:
+                            Theme.of(context).colorScheme.onPrimaryContainer),
                     filled: true,
-                    fillColor: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3),
+                    fillColor: Theme.of(context)
+                        .colorScheme
+                        .primaryContainer
+                        .withOpacity(0.3),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                       borderSide: BorderSide.none,
@@ -81,7 +91,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => const HomeScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => const HomeScreen()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -99,13 +110,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                   child: Text(
                     'Forgot your password?',
-                    style: TextStyle(color: Theme.of(context).colorScheme.onPrimaryContainer),
+                    style: TextStyle(
+                        color:
+                            Theme.of(context).colorScheme.onPrimaryContainer),
                   ),
                 ),
                 const SizedBox(height: 24.0),
                 Text(
                   'Don\'t have an account? Sign up',
-                  style: TextStyle(color: Theme.of(context).colorScheme.onPrimaryContainer),
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.onPrimaryContainer),
                   textAlign: TextAlign.center,
                 ),
               ],

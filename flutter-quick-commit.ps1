@@ -5,10 +5,12 @@ param(
     [string]$CommitMessage
 )
 
-# Define the full path to Flutter
+# Define the full paths to Flutter and Dart
 $flutterPath = "C:\Users\Nikolaus Franz\OneDrive\Documents\flutter\bin\flutter.bat"
+$dartPath = "C:\Users\Nikolaus Franz\OneDrive\Documents\flutter\bin\dart.bat"
 
 Write-Host "Script started. Flutter path: $flutterPath"
+Write-Host "Dart path: $dartPath"
 
 # Check if Flutter executable exists
 if (Test-Path $flutterPath) {
@@ -20,9 +22,15 @@ if (Test-Path $flutterPath) {
     exit 1
 }
 
-# Attempt to update Flutter
-Write-Host "Attempting to update Flutter..." -ForegroundColor Cyan
-& "$flutterPath" upgrade
+# Check if Dart executable exists
+if (Test-Path $dartPath) {
+    Write-Host "Dart executable found."
+    Write-Host "Dart version:"
+    & "$dartPath" --version
+} else {
+    Write-Host "Dart executable not found at the specified path."
+    exit 1
+}
 
 # Check if we're in a Flutter project
 if (-not (Test-Path pubspec.yaml)) {
@@ -38,8 +46,8 @@ if (-not (Test-Path .git)) {
 
 # Run Dart format
 Write-Host "Running Dart format..." -ForegroundColor Cyan
-Write-Host "Command: & `"$flutterPath`" pub run dart:format ."
-& "$flutterPath" pub run dart:format .
+Write-Host "Command: & `"$dartPath`" format ."
+& "$dartPath" format .
 
 # Run Flutter analyze
 Write-Host "Running Flutter analyze..." -ForegroundColor Cyan
