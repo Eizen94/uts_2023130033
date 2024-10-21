@@ -77,6 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     hintStyle: const TextStyle(color: Colors.white70),
                   ),
+                  style: const TextStyle(color: Colors.white),
                 ),
                 const SizedBox(height: 24.0),
                 ElevatedButton(
