@@ -37,6 +37,17 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                Container(
+                  height: 120,
+                  color: Colors.white.withOpacity(0.3),
+                  child: const Center(
+                    child: Text(
+                      'Logo',
+                      style: TextStyle(color: Colors.white, fontSize: 24),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 24),
                 const Text(
                   'Login',
                   style: TextStyle(
