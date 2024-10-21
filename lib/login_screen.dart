@@ -58,6 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       borderRadius: BorderRadius.circular(30),
                       borderSide: BorderSide.none,
                     ),
+                    hintStyle: const TextStyle(color: Colors.white70),
                   ),
                 ),
                 const SizedBox(height: 16.0),
