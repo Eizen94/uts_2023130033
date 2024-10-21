@@ -51,14 +51,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   controller: _usernameController,
                   decoration: InputDecoration(
                     hintText: 'Username',
-                    prefixIcon: Icon(Icons.person,
-                        color:
-                            Theme.of(context).colorScheme.onPrimaryContainer),
+                    prefixIcon: const Icon(Icons.person, color: Colors.white),
                     filled: true,
-                    fillColor: Theme.of(context)
-                        .colorScheme
-                        .primaryContainer
-                        .withOpacity(0.3),
+                    fillColor: Colors.white.withOpacity(0.3),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                       borderSide: BorderSide.none,
