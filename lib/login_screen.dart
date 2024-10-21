@@ -34,11 +34,11 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Container(
-                  height: 120,
+                  height: 280,
                   color: Colors.white.withOpacity(0.3),
                   child: const Center(
                     child: Text(
@@ -57,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 48.0),
+                const SizedBox(height: 24.0),
                 TextField(
                   controller: _usernameController,
                   decoration: InputDecoration(
