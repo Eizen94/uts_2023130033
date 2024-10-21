@@ -70,10 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     hintText: 'Password',
                     prefixIcon: const Icon(Icons.lock, color: Colors.white),
                     filled: true,
-                    fillColor: Theme.of(context)
-                        .colorScheme
-                        .primaryContainer
-                        .withOpacity(0.3),
+                    fillColor: Colors.white.withOpacity(0.3),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                       borderSide: BorderSide.none,
