@@ -100,21 +100,34 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 16.0),
                 TextButton(
                   onPressed: () {
-                    // Implement forgot password functionality
+                    // Mengimplementasi fungsionalitas lupa password
                   },
-                  child: Text(
+                  child: const Text(
                     'Forgot your password?',
-                    style: TextStyle(
-                        color:
-                            Theme.of(context).colorScheme.onPrimaryContainer),
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
                 const SizedBox(height: 24.0),
-                Text(
-                  'Don\'t have an account? Sign up',
-                  style: TextStyle(
-                      color: Theme.of(context).colorScheme.onPrimaryContainer),
-                  textAlign: TextAlign.center,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Don\'t have an account?',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        // Mengimplementasikan fungsionallitas Sign Up
+                      },
+                      child: const Text(
+                        'Sign up',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
