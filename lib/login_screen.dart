@@ -68,9 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   obscureText: true,
                   decoration: InputDecoration(
                     hintText: 'Password',
-                    prefixIcon: Icon(Icons.lock,
-                        color:
-                            Theme.of(context).colorScheme.onPrimaryContainer),
+                    prefixIcon: const Icon(Icons.lock, color: Colors.white),
                     filled: true,
                     fillColor: Theme.of(context)
                         .colorScheme
