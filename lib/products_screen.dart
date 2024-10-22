@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'product_model.dart';
+import 'cart_screen.dart';
+import 'main.dart';
 
 class ProductScreen extends StatefulWidget {
   final Product product;
@@ -31,6 +33,8 @@ class _ProductScreenState extends State<ProductScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final cart = CartProvider.of(context).cart;
+
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -53,10 +57,55 @@ class _ProductScreenState extends State<ProductScreen> {
                       icon: const Icon(Icons.arrow_back, color: Colors.white),
                       onPressed: () => Navigator.pop(context),
                     ),
-                    IconButton(
-                      icon:
-                          const Icon(Icons.shopping_cart, color: Colors.white),
-                      onPressed: () {},
+                    Stack(
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.shopping_cart,
+                              color: Colors.white),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CartScreen(
+                                  cart: cart,
+                                  onUpdateQuantity: (productId) {
+                                    CartProvider.of(context)
+                                        .updateQuantity(productId, 1);
+                                  },
+                                  onRemoveItem: (productId) {
+                                    CartProvider.of(context)
+                                        .removeItem(productId);
+                                  },
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                        if (cart.itemCount > 0)
+                          Positioned(
+                            right: 0,
+                            top: 0,
+                            child: Container(
+                              padding: const EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                color: Colors.red,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              constraints: const BoxConstraints(
+                                minWidth: 20,
+                                minHeight: 20,
+                              ),
+                              child: Text(
+                                '${cart.itemCount}',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+                      ],
                     ),
                   ],
                 ),
@@ -193,8 +242,55 @@ class _ProductScreenState extends State<ProductScreen> {
                             Expanded(
                               child: ElevatedButton(
                                 onPressed: () {
-                                  //Handle add to cart
-                                  Navigator.pop(context);
+                                  // Add to cart
+                                  CartProvider.of(context).addItem(
+                                    widget.product.name, // using name as ID
+                                    widget.product.name,
+                                    widget.product.price,
+                                    widget.product.imageUrl,
+                                    quantity: quantity,
+                                  );
+
+                                  // Show success message
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        '${widget.product.name} added to cart',
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      backgroundColor: const Color(0xFF7C4DFF),
+                                      duration: const Duration(seconds: 2),
+                                      behavior: SnackBarBehavior.floating,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      action: SnackBarAction(
+                                        label: 'View Cart',
+                                        textColor: Colors.white,
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => CartScreen(
+                                                cart: cart,
+                                                onUpdateQuantity: (productId) {
+                                                  CartProvider.of(context)
+                                                      .updateQuantity(
+                                                          productId, 1);
+                                                },
+                                                onRemoveItem: (productId) {
+                                                  CartProvider.of(context)
+                                                      .removeItem(productId);
+                                                },
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  );
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xFF7C4DFF),

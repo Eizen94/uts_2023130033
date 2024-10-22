@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'product_model.dart';
 import 'products_screen.dart';
+import 'cart_screen.dart';
+import 'main.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -23,6 +25,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cart = CartProvider.of(context).cart;
+
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -169,10 +173,55 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: const Color(0xFF7C4DFF),
-        child: const Icon(Icons.shopping_cart, color: Colors.white),
+      floatingActionButton: Stack(
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CartScreen(
+                    cart: cart,
+                    onUpdateQuantity: (productId) {
+                      // quantity update
+                      CartProvider.of(context).updateQuantity(productId, 1);
+                    },
+                    onRemoveItem: (productId) {
+                      // remove item
+                      CartProvider.of(context).removeItem(productId);
+                    },
+                  ),
+                ),
+              );
+            },
+            backgroundColor: const Color(0xFF7C4DFF),
+            child: const Icon(Icons.shopping_cart, color: Colors.white),
+          ),
+          if (cart.itemCount > 0)
+            Positioned(
+              right: 0,
+              top: 0,
+              child: Container(
+                padding: const EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                constraints: const BoxConstraints(
+                  minWidth: 20,
+                  minHeight: 20,
+                ),
+                child: Text(
+                  '${cart.itemCount}',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+        ],
       ),
     );
   }
