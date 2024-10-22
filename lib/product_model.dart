@@ -172,15 +172,85 @@ Built-in Fingerprint Sensor
 Microsoft Pluton security processor''',
   ),
   Product(
-      name: 'Xiaomi - Pad 6s Pro 12,4 inch 8/256GB',
-      price: 7582000.00,
-      imageUrl:
-          'assets/images/products/Xiaomi Pad 6s Pro 12,4 inch 8GB - 256GB.jpg',
-      description: ''),
+    name: 'Xiaomi - Pad 6s Pro 12,4 inch 8/256GB',
+    price: 7582000.00,
+    imageUrl:
+        'assets/images/products/Xiaomi Pad 6s Pro 12,4 inch 8GB - 256GB.jpg',
+    description: '''Spesifikasi:
+Ukuran: Layar 3K 12,4″, rasio aspek 3:2
+Resolusi: 3048*2032 294 ppi
+Bahan: LCD
+Refresh rate: AdaptiveSync 144 Hz (30/48/50/60/90/120/144 Hz)
+Kecerahan: 700 nit (standar); 900 nit (HBM)
+Touch sampling rate: hingga 360 Hz
+Rasio layar terhadap bodi: 88,5%
+Rasio kontras: 1400:1
+Gamut warna: DCI-P3
+Kedalaman warna: 68,7 miliar warna; Warna awal Pro
+Peredupan: Penyesuaian kecerahan 4.096 tingkat, peredupan DC
+Dolby Vision®, HDR10, Kompensasi dinamis
+Mode baca adaptif
+Sertifikasi Cahaya Biru Rendah TÜV Rheinland
+
+Kamera belakang:
+Kamera utama: 50 MPJN1, 1/2,76″, f/1,8, ukuran piksel 4-in-1 0,64 mikro meter
+Kamera kedalaman: 2 MP
+OV02B1B, 1/5″, f/2,4, ukuran piksel 1,75 mikro meter
+
+Kamera depan: 32 MP
+OV32D
+f/2,2, ukuran piksel 4-in-1 0,61 mikro meter
+
+Prosesor Snapdragon® 8 Gen 2 Mobile Platform
+
+Memori 8 GB+256 GB
+Penyimpanan RAM LPDDR5X + UFS 4.0
+
+Baterai 10.000 mAh (standar) / 9.800 mAh (min)
+Mendukung HyperCharge 120 W, Diisi daya hingga 100% dalam 35 menit
+USB Tipe-C
+USB 3.2 Gen 1 Hingga 5 Gbps
+Bluetooth 5.3
+Wi-Fi 7,802.11
+Mendukung tag NFC
+IPv6
+
+Sensor
+G-sensor｜Giroskop｜L-sensor｜P-sensor｜E-Compass｜Sensor Sidik Jari｜Sensor Hall｜Sensor Kedip｜Sensor suhu warna
+
+Xiaomi HyperOS, Android U
+
+Tinggi: 278,70 mm
+Lebar: 191,58 mm
+Tebal: 6,26 mm
+Bobot: 590 g''',
+  ),
   Product(
-      name: 'Samsung - Galaxy Tab S9+ 12/512GB',
-      price: 19999000.00,
-      imageUrl:
-          'assets/images/products/Samsung Galaxy Tab S9+ 12GB - 512GB.jpg',
-      description: ''),
+    name: 'Samsung - Galaxy Tab S9+ 12/512GB',
+    price: 19999000.00,
+    imageUrl: 'assets/images/products/Samsung Galaxy Tab S9+ 12GB - 512GB.jpg',
+    description: '''Spesifikasi:
+- Processor : Snapdragon 8 Gen 2
+- Size : 326.4 x 208.6 x 5.5 mm
+- Technology : Dynamic AMOLED 2X
+- Resolution : WQXGA+
+- Rear Camera Resolution : 13 MP + 8 MP UW
+- Main Camera Auto Focus : 12 MP + 12 MP UW
+- Rear Camera - OIS : Ultra Wide : 8 MP, Main: 13 M
+- Rear Camera - Zoom : No
+- Front Camera Resolution : Ultra Wide : 12 MP, Main : 12 MP
+- Front Camera Auto Focus : No
+- Video Resolution : 4K@30/60fps, 1080p@30fps
+- RAM : 12GB
+- ROM : 512GB
+- SIM Tray : Single-SIM
+- Network Type : 5G
+- USB Interface : USB Type-C
+- USB Version : USB 3.2
+- Bluetooth Version : Bluetooth 5.3
+- NFC : No
+- Audio : Quad Speakers by AKG
+- Battery Capacity : 11,200 mAh,Max. 45W Fast Charging
+- Special Interface : S Pen (In box), On-Screen Fingerprint (FOD)''',
+  ),
 ];
