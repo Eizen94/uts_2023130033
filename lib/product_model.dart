@@ -53,4 +53,15 @@ List<Product> sampleProducts = [
     price: 19999000.00,
     imageUrl: 'assets/images/products/Samsung Galaxy Tab S9+ 12GB - 512GB.jpg',
   ),
+  Product(
+    name: 'MSI - Claw Ultra 7 16/1TB',
+    price: 8249000.00,
+    imageUrl: 'assets/images/products/MSI - Claw Ultra 7 16GB - 1TB.jpg',
+  ),
+  Product(
+    name: 'Asus - ROG Ally X AMD Z1 Extreme 24G/1TB',
+    price: 13999000.00,
+    imageUrl:
+        'assets/images/products/Asus - ROG Ally X AMD Z1 Extreme 24GB - 1TB.jpg',
+  ),
 ];
