@@ -49,6 +49,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              //Grid of Products
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -60,7 +61,7 @@ class HomeScreen extends StatelessWidget {
                       mainAxisSpacing: 16,
                       childAspectRatio: 0.8,
                     ),
-                    itemCount: 6,
+                    itemCount: 6, //Number of Products
                     itemBuilder: (context, index) {
                       return Container(
                         decoration: BoxDecoration(
