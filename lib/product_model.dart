@@ -25,7 +25,7 @@ List<Product> sampleProducts = [
   Product(
     name: 'Xbox Series X',
     price: 7125000.00,
-    imageUrl: 'assets/images/products/Xbox Series X.png',
+    imageUrl: 'assets/images/products/Xbox Series X.jpg',
   ),
   Product(
     name: 'Xbox Series S',
