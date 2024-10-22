@@ -12,8 +12,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CartProvider(
+      notifier: CartNotifier(),
       child: MaterialApp(
         title: 'Flutter Login Demo',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
           useMaterial3: true,
@@ -24,65 +26,44 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// Cart Provider
-class CartProvider extends StatefulWidget {
-  final Widget child;
-
+class CartProvider extends InheritedNotifier<CartNotifier> {
   const CartProvider({
     super.key,
-    required this.child,
+    required super.notifier,
+    required super.child,
   });
 
-  static CartProviderState of(BuildContext context) {
-    final CartProviderState? result =
-        context.findAncestorStateOfType<CartProviderState>();
-    if (result != null) {
-      return result;
-    }
-    throw FlutterError.fromParts(<DiagnosticsNode>[
-      ErrorSummary(
-          'CartProvider.of() called with a context that does not contain a CartProvider.'),
-      ErrorDescription(
-          'No CartProvider ancestor could be found starting from the context that was passed.'),
-    ]);
+  static CartNotifier of(BuildContext context) {
+    final CartProvider? result =
+        context.dependOnInheritedWidgetOfExactType<CartProvider>();
+    assert(result != null, 'No CartProvider found in context');
+    return result!.notifier!;
   }
-
-  @override
-  State<CartProvider> createState() => CartProviderState();
 }
 
-class CartProviderState extends State<CartProvider> {
+class CartNotifier extends ChangeNotifier {
   final Cart _cart = Cart();
 
   Cart get cart => _cart;
 
   void addItem(String productId, String name, double price, String imageUrl,
       {int quantity = 1}) {
-    setState(() {
-      _cart.addItem(productId, name, price, imageUrl, quantity: quantity);
-    });
+    _cart.addItem(productId, name, price, imageUrl, quantity: quantity);
+    notifyListeners();
   }
 
   void removeItem(String productId) {
-    setState(() {
-      _cart.removeItem(productId);
-    });
+    _cart.removeItem(productId);
+    notifyListeners();
   }
 
   void updateQuantity(String productId, int quantity) {
-    setState(() {
-      _cart.updateQuantity(productId, quantity);
-    });
+    _cart.updateQuantity(productId, quantity);
+    notifyListeners();
   }
 
   void clearCart() {
-    setState(() {
-      _cart.clear();
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return widget.child;
+    _cart.clear();
+    notifyListeners();
   }
 }

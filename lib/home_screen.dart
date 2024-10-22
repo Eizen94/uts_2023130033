@@ -25,7 +25,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cart = CartProvider.of(context).cart;
+    final cartNotifier = CartProvider.of(context);
+    final cart = cartNotifier.cart;
 
     return Scaffold(
       body: Container(
@@ -39,7 +40,7 @@ class HomeScreen extends StatelessWidget {
         child: SafeArea(
           child: Column(
             children: [
-              //App Bar
+              // App Bar
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Row(
@@ -49,14 +50,50 @@ class HomeScreen extends StatelessWidget {
                       icon: const Icon(Icons.menu, color: Colors.white),
                       onPressed: () {},
                     ),
-                    IconButton(
-                      icon: const Icon(Icons.search, color: Colors.white),
-                      onPressed: () {},
+                    Stack(
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.shopping_cart,
+                              color: Colors.white),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const CartScreen(),
+                              ),
+                            );
+                          },
+                        ),
+                        if (cart.itemCount > 0)
+                          Positioned(
+                            right: 0,
+                            top: 0,
+                            child: Container(
+                              padding: const EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                color: Colors.red,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              constraints: const BoxConstraints(
+                                minWidth: 20,
+                                minHeight: 20,
+                              ),
+                              child: Text(
+                                '${cart.itemCount}',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+                      ],
                     ),
                   ],
                 ),
               ),
-              //Title
+              // Title
               const Padding(
                 padding: EdgeInsets.all(16.0),
                 child: Align(
@@ -71,7 +108,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              //Grid of Products
+              // Grid of Products
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -118,19 +155,44 @@ class HomeScreen extends StatelessWidget {
                                     borderRadius: const BorderRadius.vertical(
                                       top: Radius.circular(12),
                                     ),
-                                    child: Image.asset(
-                                      product.imageUrl,
-                                      fit: BoxFit.cover,
-                                      errorBuilder:
-                                          (context, error, stackTrace) {
-                                        return const Center(
-                                          child: Icon(
-                                            Icons.image,
-                                            size: 48,
-                                            color: Colors.white,
+                                    child: Stack(
+                                      fit: StackFit.expand,
+                                      children: [
+                                        Image.asset(
+                                          product.imageUrl,
+                                          fit: BoxFit.cover,
+                                          errorBuilder:
+                                              (context, error, stackTrace) {
+                                            return const Center(
+                                              child: Icon(
+                                                Icons.image,
+                                                size: 48,
+                                                color: Colors.white,
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                        if (cart.containsItem(product.name))
+                                          Positioned(
+                                            top: 8,
+                                            right: 8,
+                                            child: Container(
+                                              padding: const EdgeInsets.all(4),
+                                              decoration: BoxDecoration(
+                                                color: const Color(0xFF7C4DFF),
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                              ),
+                                              child: Text(
+                                                'In Cart: ${cart.getItem(product.name)?.quantity ?? 0}',
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ),
                                           ),
-                                        );
-                                      },
+                                      ],
                                     ),
                                   ),
                                 ),
@@ -173,55 +235,45 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: Stack(
-        children: [
-          FloatingActionButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => CartScreen(
-                    cart: cart,
-                    onUpdateQuantity: (productId) {
-                      // quantity update
-                      CartProvider.of(context).updateQuantity(productId, 1);
-                    },
-                    onRemoveItem: (productId) {
-                      // remove item
-                      CartProvider.of(context).removeItem(productId);
-                    },
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const CartScreen(),
+            ),
+          );
+        },
+        backgroundColor: const Color(0xFF7C4DFF),
+        child: Stack(
+          children: [
+            const Icon(Icons.shopping_cart, color: Colors.white),
+            if (cart.itemCount > 0)
+              Positioned(
+                right: -4,
+                top: -4,
+                child: Container(
+                  padding: const EdgeInsets.all(2),
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                ),
-              );
-            },
-            backgroundColor: const Color(0xFF7C4DFF),
-            child: const Icon(Icons.shopping_cart, color: Colors.white),
-          ),
-          if (cart.itemCount > 0)
-            Positioned(
-              right: 0,
-              top: 0,
-              child: Container(
-                padding: const EdgeInsets.all(2),
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                constraints: const BoxConstraints(
-                  minWidth: 20,
-                  minHeight: 20,
-                ),
-                child: Text(
-                  '${cart.itemCount}',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
+                  constraints: const BoxConstraints(
+                    minWidth: 16,
+                    minHeight: 16,
                   ),
-                  textAlign: TextAlign.center,
+                  child: Text(
+                    '${cart.itemCount}',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 10,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }

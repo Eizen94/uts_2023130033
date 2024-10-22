@@ -32,8 +32,24 @@ class _ProductScreenState extends State<ProductScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    // Initialize quantity based on cart if item exists
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final cartItem =
+          CartProvider.of(context).cart.getItem(widget.product.name);
+      if (cartItem != null) {
+        setState(() {
+          quantity = cartItem.quantity;
+        });
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final cart = CartProvider.of(context).cart;
+    final cartNotifier = CartProvider.of(context);
+    final cart = cartNotifier.cart;
 
     return Scaffold(
       body: Container(
@@ -47,7 +63,7 @@ class _ProductScreenState extends State<ProductScreen> {
         child: SafeArea(
           child: Column(
             children: [
-              //App Bar
+              // App Bar
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Row(
@@ -66,17 +82,7 @@ class _ProductScreenState extends State<ProductScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => CartScreen(
-                                  cart: cart,
-                                  onUpdateQuantity: (productId) {
-                                    CartProvider.of(context)
-                                        .updateQuantity(productId, 1);
-                                  },
-                                  onRemoveItem: (productId) {
-                                    CartProvider.of(context)
-                                        .removeItem(productId);
-                                  },
-                                ),
+                                builder: (context) => const CartScreen(),
                               ),
                             );
                           },
@@ -110,13 +116,13 @@ class _ProductScreenState extends State<ProductScreen> {
                   ],
                 ),
               ),
-              //content
+              // Content
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      //Product Image
+                      // Product Image
                       Container(
                         height: MediaQuery.of(context).size.height * 0.4,
                         margin: const EdgeInsets.symmetric(horizontal: 24),
@@ -126,23 +132,51 @@ class _ProductScreenState extends State<ProductScreen> {
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(12),
-                          child: Image.asset(
-                            widget.product.imageUrl,
-                            fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) {
-                              return const Center(
-                                child: Icon(
-                                  Icons.image,
-                                  size: 48,
-                                  color: Colors.white,
+                          child: Stack(
+                            fit: StackFit.expand,
+                            children: [
+                              Image.asset(
+                                widget.product.imageUrl,
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return const Center(
+                                    child: Icon(
+                                      Icons.image,
+                                      size: 48,
+                                      color: Colors.white,
+                                    ),
+                                  );
+                                },
+                              ),
+                              if (cart.containsItem(widget.product.name))
+                                Positioned(
+                                  top: 16,
+                                  right: 16,
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 12,
+                                      vertical: 6,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFF7C4DFF),
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Text(
+                                      'In Cart: ${cart.getItem(widget.product.name)?.quantity ?? 0}',
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              );
-                            },
+                            ],
                           ),
                         ),
                       ),
                       const SizedBox(height: 24),
-                      //product Name
+                      // Product Name
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 24),
                         child: Text(
@@ -155,7 +189,7 @@ class _ProductScreenState extends State<ProductScreen> {
                         ),
                       ),
                       const SizedBox(height: 8),
-                      //Product Price
+                      // Product Price
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 24),
                         child: Text(
@@ -168,7 +202,7 @@ class _ProductScreenState extends State<ProductScreen> {
                         ),
                       ),
                       const SizedBox(height: 16),
-                      //Product Description
+                      // Product Description
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 24),
                         child: Container(
@@ -188,7 +222,7 @@ class _ProductScreenState extends State<ProductScreen> {
                         ),
                       ),
                       const SizedBox(height: 24),
-                      //Quantity Selector and Add to Cart Button
+                      // Quantity Selector and Add to Cart Button
                       Padding(
                         padding: const EdgeInsets.all(24),
                         child: Row(
@@ -242,16 +276,14 @@ class _ProductScreenState extends State<ProductScreen> {
                             Expanded(
                               child: ElevatedButton(
                                 onPressed: () {
-                                  // Add to cart
-                                  CartProvider.of(context).addItem(
-                                    widget.product.name, // using name as ID
+                                  cartNotifier.addItem(
+                                    widget.product.name,
                                     widget.product.name,
                                     widget.product.price,
                                     widget.product.imageUrl,
                                     quantity: quantity,
                                   );
 
-                                  // Show success message
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(
@@ -273,18 +305,8 @@ class _ProductScreenState extends State<ProductScreen> {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                              builder: (context) => CartScreen(
-                                                cart: cart,
-                                                onUpdateQuantity: (productId) {
-                                                  CartProvider.of(context)
-                                                      .updateQuantity(
-                                                          productId, 1);
-                                                },
-                                                onRemoveItem: (productId) {
-                                                  CartProvider.of(context)
-                                                      .removeItem(productId);
-                                                },
-                                              ),
+                                              builder: (context) =>
+                                                  const CartScreen(),
                                             ),
                                           );
                                         },
@@ -301,9 +323,11 @@ class _ProductScreenState extends State<ProductScreen> {
                                     borderRadius: BorderRadius.circular(12),
                                   ),
                                 ),
-                                child: const Text(
-                                  'Add to cart',
-                                  style: TextStyle(
+                                child: Text(
+                                  cart.containsItem(widget.product.name)
+                                      ? 'Update Cart'
+                                      : 'Add to Cart',
+                                  style: const TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                   ),

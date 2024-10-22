@@ -80,4 +80,12 @@ class Cart {
   void clear() {
     _items.clear();
   }
+
+  CartItem? getItem(String productId) {
+    return _items[productId];
+  }
+
+  bool containsItem(String productId) {
+    return _items.containsKey(productId);
+  }
 }
