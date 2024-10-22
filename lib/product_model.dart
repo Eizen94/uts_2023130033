@@ -32,4 +32,14 @@ List<Product> sampleProducts = [
     price: 4490000.00,
     imageUrl: 'assets/images/products/Xbox Series S.jpg',
   ),
+  Product(
+    name: 'Nintendo Switch',
+    price: 3400000.00,
+    imageUrl: 'assets/images/products/Nintendo Switch.jpg',
+  ),
+  Product(
+    name: 'Nintendo Switch OLED',
+    price: 3990000.00,
+    imageUrl: 'assets/images/products/Nintendo Switch OLED.jpg',
+  ),
 ];
