@@ -53,13 +53,17 @@ class _LoginScreenState extends State<LoginScreen> {
                             decoration: BoxDecoration(
                               color: Colors.white.withOpacity(0.3),
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(0),
-                              child: Image.asset(
-                                'assets/images/Logo.jpg',
-                                width: double.infinity,
-                                height: double.infinity,
-                                fit: BoxFit.cover,
+                            child: Center(
+                              child: AspectRatio(
+                                aspectRatio: 16 / 9,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: Image.asset(
+                                    'assets/images/Logo.png',
+                                    fit: BoxFit.contain,
+                                    filterQuality: FilterQuality.high,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
