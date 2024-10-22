@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'product_model.dart';
+import 'products_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -83,7 +84,13 @@ class HomeScreen extends StatelessWidget {
                       final product = sampleProducts[index];
                       return InkWell(
                         onTap: () {
-                          // Handle product tap
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  ProductScreen(product: product),
+                            ),
+                          );
                         },
                         child: Container(
                           decoration: BoxDecoration(
