@@ -48,42 +48,42 @@ List<Product> sampleProducts = [
     name: 'MSI - Claw Ultra 7 16/1TB',
     price: 8249000.00,
     imageUrl: 'assets/images/products/MSI - Claw Ultra 7 16GB - 1TB.jpg',
-    description: 'Spesifikasi:'
-        'Intel® Core™ Ultra 7 Processor with Intel® AI Boost (NPU)'
-        'Windows 11 Home'
-        '7" FHD (1920x1080), 120Hz, IPS-Level, Touchscreen Intel® Arc™ Graphics'
-        '16GB LPDDR5-6400'
-        '1TB SSD'
-        'Intel® Killer™ BE Wi-Fi 7 + Bluetooth 5.4'
-        ''
-        'AUDIO JACK'
-        '1x Mic-in/Headphone-out Combo Jack'
-        ''
-        'I/O PORTS'
-        '1x Type-C (USB / DP / Thunderbolt™ 4) with PD charging'
-        '1x Micro SD Card Reader'
-        ''
-        'CONTROL'
-        'RGB ABXY buttons'
-        'RGB L & R Hall Effect analog sticks'
-        'D-pad'
-        'L & R Hall Effect analog triggers'
-        'L & R bumpers'
-        'View button'
-        'Menu button'
-        'MSI Center M button'
-        'Quick Settings Key'
-        '2x Assignable grip buttons'
-        'HD haptics'
-        ''
-        'Fingerprint Security'
-        '6-Cell 53 Battery (Whr)'
-        'AC ADAPTER 65W PD adapter'
-        ''
-        'DIMENSION (WXDXH) : 294 x 117 x 21.2mm'
-        'WEIGHT (W/ BATTERY) : 675 g'
-        ''
-        'COLOR : Black',
+    description: '''Spesifikasi:
+        Intel® Core™ Ultra 7 Processor with Intel® AI Boost (NPU)
+        Windows 11 Home
+        7" FHD (1920x1080), 120Hz, IPS-Level, Touchscreen Intel® Arc™ Graphics
+        16GB LPDDR5-6400
+        1TB SSD
+        Intel® Killer™ BE Wi-Fi 7 + Bluetooth 5.4
+        
+        AUDIO JACK
+        1x Mic-in/Headphone-out Combo Jack
+        
+        I/O PORTS
+        1x Type-C (USB / DP / Thunderbolt™ 4) with PD charging
+        1x Micro SD Card Reader
+        
+        CONTROL
+        RGB ABXY buttons
+        RGB L & R Hall Effect analog sticks
+        D-pad
+        L & R Hall Effect analog triggers
+        L & R bumpers
+        View button
+        Menu button
+        MSI Center M button
+        Quick Settings Key
+        2x Assignable grip buttons
+        HD haptics
+        
+        Fingerprint Security
+        6-Cell 53 Battery (Whr)
+        AC ADAPTER 65W PD adapter
+        
+        DIMENSION (WXDXH) : 294 x 117 x 21.2mm
+        WEIGHT (W/ BATTERY) : 675 g
+        
+        COLOR : Black''',
   ),
   Product(
       name: 'Asus - ROG Ally X AMD Z1 Extreme 24G/1TB',
