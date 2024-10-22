@@ -61,7 +61,7 @@ class HomeScreen extends StatelessWidget {
                       mainAxisSpacing: 16,
                       childAspectRatio: 0.8,
                     ),
-                    itemCount: 6, //Number of Products
+                    itemCount: 10, //Number of Products
                     itemBuilder: (context, index) {
                       return Container(
                         decoration: BoxDecoration(
