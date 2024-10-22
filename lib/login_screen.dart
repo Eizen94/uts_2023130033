@@ -50,12 +50,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: [
                           Container(
                             height: MediaQuery.of(context).size.height * 0.3,
-                            color: Colors.white.withOpacity(0.3),
-                            child: const Center(
-                              child: Text(
-                                'Logo',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 24),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.3),
+                            ),
+                            child: Center(
+                              child: Image.asset(
+                                'assets/images/Logo.jpg',
+                                fit: BoxFit.contain,
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.2,
                               ),
                             ),
                           ),
