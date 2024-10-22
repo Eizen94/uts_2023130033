@@ -27,4 +27,9 @@ List<Product> sampleProducts = [
     price: 7125000.00,
     imageUrl: 'assets/images/products/Xbox Series X.png',
   ),
+  Product(
+    name: 'Xbox Series S',
+    price: 4490000.00,
+    imageUrl: 'assets/images/products/Xbox Series S.jpg',
+  ),
 ];
