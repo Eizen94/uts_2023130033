@@ -1,7 +1,24 @@
 import 'package:flutter/material.dart';
+import 'product_model.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
+
+  String formatPrice(double price) {
+    var wholePart = price.toInt().toString();
+    var formattedWholePart = '';
+
+    var counter = 0;
+    for (var i = wholePart.length - 1; i >= 0; i--) {
+      counter++;
+      formattedWholePart = wholePart[i] + formattedWholePart;
+      if (counter % 3 == 0 && i > 0) {
+        formattedWholePart = '.$formattedWholePart';
+      }
+    }
+
+    return 'Rp $formattedWholePart,00';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,51 +76,82 @@ class HomeScreen extends StatelessWidget {
                       crossAxisCount: 2,
                       crossAxisSpacing: 16,
                       mainAxisSpacing: 16,
-                      childAspectRatio: 0.8,
+                      childAspectRatio: 0.75,
                     ),
-                    itemCount: 10, //Number of Products
+                    itemCount: sampleProducts.length,
                     itemBuilder: (context, index) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.3),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Expanded(
-                              flex: 3,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.2),
-                                  borderRadius: const BorderRadius.vertical(
-                                    top: Radius.circular(12),
+                      final product = sampleProducts[index];
+                      return InkWell(
+                        onTap: () {
+                          // Handle product tap
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.3),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              // Product Image
+                              Expanded(
+                                flex: 3,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.2),
+                                    borderRadius: const BorderRadius.vertical(
+                                      top: Radius.circular(12),
+                                    ),
                                   ),
-                                ),
-                                child: const Center(
-                                  child: Icon(
-                                    Icons.image,
-                                    size: 48,
-                                    color: Colors.white,
+                                  child: ClipRRect(
+                                    borderRadius: const BorderRadius.vertical(
+                                      top: Radius.circular(12),
+                                    ),
+                                    child: Image.asset(
+                                      product.imageUrl,
+                                      fit: BoxFit.cover,
+                                      errorBuilder:
+                                          (context, error, stackTrace) {
+                                        return const Center(
+                                          child: Icon(
+                                            Icons.image,
+                                            size: 48,
+                                            color: Colors.white,
+                                          ),
+                                        );
+                                      },
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                padding: const EdgeInsets.all(8),
-                                child: const Text(
-                                  'Title',
-                                  style: TextStyle(
+                              // Product Name
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(8, 8, 8, 4),
+                                child: Text(
+                                  product.name,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              // Product Price
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+                                child: Text(
+                                  formatPrice(product.price),
+                                  style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 16,
+                                    fontWeight: FontWeight.bold,
                                   ),
-                                  textAlign: TextAlign.center,
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       );
                     },
