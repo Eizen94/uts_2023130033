@@ -34,7 +34,7 @@ class _ProductScreenState extends State<ProductScreen> {
   @override
   void initState() {
     super.initState();
-    // Initialize quantity based on cart if item exists
+    // Inisialisasi kuantitas berdasarkan keranjang jika item ada
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final cartItem =
           CartProvider.of(context).cart.getItem(widget.product.name);
@@ -122,7 +122,7 @@ class _ProductScreenState extends State<ProductScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      // Product Image
+                      // gambar produk
                       Container(
                         height: MediaQuery.of(context).size.height * 0.4,
                         margin: const EdgeInsets.symmetric(horizontal: 24),
@@ -176,7 +176,7 @@ class _ProductScreenState extends State<ProductScreen> {
                         ),
                       ),
                       const SizedBox(height: 24),
-                      // Product Name
+                      // Nama produk
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 24),
                         child: Text(
@@ -189,7 +189,7 @@ class _ProductScreenState extends State<ProductScreen> {
                         ),
                       ),
                       const SizedBox(height: 8),
-                      // Product Price
+                      // harga produk
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 24),
                         child: Text(
@@ -202,7 +202,7 @@ class _ProductScreenState extends State<ProductScreen> {
                         ),
                       ),
                       const SizedBox(height: 16),
-                      // Product Description
+                      // deskripsi produk
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 24),
                         child: Container(
@@ -222,7 +222,7 @@ class _ProductScreenState extends State<ProductScreen> {
                         ),
                       ),
                       const SizedBox(height: 24),
-                      // Quantity Selector and Add to Cart Button
+                      // tombol Quantity and tombol add to Cart
                       Padding(
                         padding: const EdgeInsets.all(24),
                         child: Row(

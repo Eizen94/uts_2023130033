@@ -12,7 +12,7 @@ class Product {
   });
 }
 
-//Product Data
+//Data produk
 List<Product> sampleProducts = [
   Product(
     name: 'Sony - Playstation 5',

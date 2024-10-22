@@ -108,7 +108,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              // Grid of Products
+              // tampilan Grid produk
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -141,7 +141,7 @@ class HomeScreen extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              // Product Image
+                              // gambar produk
                               Expanded(
                                 flex: 3,
                                 child: Container(
@@ -197,7 +197,7 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              // Product Name
+                              // Nama produk
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(8, 8, 8, 4),
                                 child: Text(
@@ -211,7 +211,7 @@ class HomeScreen extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ),
-                              // Product Price
+                              // harga produk
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
                                 child: Text(

@@ -58,7 +58,7 @@ class CartScreen extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    const SizedBox(width: 40), // For balance
+                    const SizedBox(width: 40), // balance
                   ],
                 ),
               ),
@@ -119,7 +119,7 @@ class CartScreen extends StatelessWidget {
                               ),
                               child: Row(
                                 children: [
-                                  // Product Image
+                                  // gambar prodak
                                   ClipRRect(
                                     borderRadius: const BorderRadius.only(
                                       topLeft: Radius.circular(12),
@@ -132,7 +132,7 @@ class CartScreen extends StatelessWidget {
                                       fit: BoxFit.cover,
                                     ),
                                   ),
-                                  // Product Details
+                                  // Ditail prodak
                                   Expanded(
                                     child: Padding(
                                       padding: const EdgeInsets.all(12),
@@ -162,7 +162,7 @@ class CartScreen extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  // Quantity Controls
+                                  // Quantitas kontrol
                                   Container(
                                     decoration: BoxDecoration(
                                       color: Colors.white.withOpacity(0.2),
@@ -212,7 +212,7 @@ class CartScreen extends StatelessWidget {
                         },
                       ),
               ),
-              // Total and Checkout
+              // Total dan Checkout
               if (cart.items.isNotEmpty)
                 Container(
                   padding: const EdgeInsets.all(16),
@@ -251,7 +251,7 @@ class CartScreen extends StatelessWidget {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
-                            // Handle checkout
+                            // checkout
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF7C4DFF),
