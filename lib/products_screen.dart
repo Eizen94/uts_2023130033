@@ -128,12 +128,9 @@ class _ProductScreenState extends State<ProductScreen> {
                             color: Colors.white.withOpacity(0.3),
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          child: const Text(
-                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestib.'
-                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestib.'
-                            'Ut enim ad minim veniam,'
-                            'quis nostrud exercitation ullamco laboris.',
-                            style: TextStyle(
+                          child: Text(
+                            widget.product.description,
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16,
                               height: 1.5,
