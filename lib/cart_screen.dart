@@ -80,6 +80,7 @@ class CartScreen extends StatelessWidget {
                         itemBuilder: (BuildContext ctx, int i) {
                           final CartItem cartItem =
                               cart.items.values.toList()[i];
+                          //swipe kiri untuk remove produk dari cart
                           return Dismissible(
                             key: Key(cartItem.productId),
                             direction: DismissDirection.endToStart,
