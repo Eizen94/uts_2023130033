@@ -3,13 +3,36 @@ class Product {
   final double price;
   final String imageUrl;
   final String description;
+  final String category;
 
   Product({
     required this.name,
     required this.price,
     required this.imageUrl,
     required this.description,
+    required this.category,
   });
+}
+
+// Enum for categories
+enum ProductCategory {
+  gamingConsole,
+  handheld,
+  tablet,
+}
+
+// Helper extension for category names
+extension CategoryName on ProductCategory {
+  String get name {
+    switch (this) {
+      case ProductCategory.gamingConsole:
+        return 'Gaming Console';
+      case ProductCategory.handheld:
+        return 'Handheld';
+      case ProductCategory.tablet:
+        return 'Tablet';
+    }
+  }
 }
 
 //Data produk
@@ -18,6 +41,7 @@ List<Product> sampleProducts = [
     name: 'Sony - Playstation 5',
     price: 8900000.00,
     imageUrl: 'assets/images/products/SonyPS5.jpg',
+    category: 'Gaming Console',
     description:
         '''The PS5® console unleashes new gaming possibilities that you never anticipated.
 
@@ -51,6 +75,7 @@ ASTRO's PLAYROOM (Pre-installed game)''',
     name: 'Sony - Playstation 5 Pro',
     price: 14999000.00,
     imageUrl: 'assets/images/products/SonyPS5_Pro.jpg',
+    category: 'Gaming Console',
     description: '''Witness Play Unleashed™
 
 With the PlayStation®5 Pro console, the world’s greatest game creators can enhance their games with incredible features like advanced ray tracing, super sharp image clarity for your 4K TV, and high frame rate gameplay.
@@ -80,6 +105,7 @@ The PS5 Pro console can play over 8,500 PS4® games. With the PS5 Pro version of
     name: 'Microsoft - Xbox Series S',
     price: 4490000.00,
     imageUrl: 'assets/images/products/Xbox Series S.jpg',
+    category: 'Gaming Console',
     description:
         '''The next generation of gaming brings our largest digital launch library yet to our smallest Xbox ever. With more dynamic worlds, faster load times, and the addition of Xbox Game Pass (sold separately), the all-digital Xbox Series S is the best value in gaming.
 Experience next-gen speed and performance with Xbox Series S in Carbon Black, featuring a 1TB SSD.
@@ -95,6 +121,7 @@ Content Packages
     name: 'Microsoft - Xbox Series X',
     price: 7125000.00,
     imageUrl: 'assets/images/products/Xbox Series X.jpg',
+    category: 'Gaming Console',
     description: '''Spesifikasi: 
 
 12 Teraflops
@@ -119,6 +146,7 @@ Include Auto Low Latency Mode (ALLM) and Dynamic Latency Input (DLI) that will m
     name: 'Nintendo - Switch',
     price: 3400000.00,
     imageUrl: 'assets/images/products/Nintendo Switch.jpg',
+    category: 'Handheld',
     description: '''Nintendo Switch - Neon Blue & Red
 
 Model number: HAC-001(-01) (product serial number begins with “XKW-XKJ”)
@@ -138,6 +166,7 @@ Nintendo Switch + Free Temper Glass''',
     name: 'Nintendo - Switch - OLED',
     price: 3990000.00,
     imageUrl: 'assets/images/products/Nintendo Switch OLED.jpg',
+    category: 'Handheld',
     description:
         '''Nintendo Switch Console OLED merupakan generasi Nintendo Switch terbaru dengan ukuran layar lebih besar 7 Inch dan dilengkapi dengan internal storage 64GB yang lebih besar dari variant sebelumnya.
 
@@ -157,6 +186,7 @@ Features white Joy-Con controllers, a black console, and a white dock.''',
     name: 'MSI - Claw Ultra 7 16/1TB',
     price: 8249000.00,
     imageUrl: 'assets/images/products/MSI - Claw Ultra 7 16GB - 1TB.jpg',
+    category: 'Handheld',
     description: '''Spesifikasi:
 
 Intel® Core™ Ultra 7 Processor with Intel® AI Boost (NPU)
@@ -203,6 +233,7 @@ COLOR : Black''',
     price: 13999000.00,
     imageUrl:
         'assets/images/products/Asus - ROG Ally X AMD Z1 Extreme 24GB - 1TB.jpg',
+    category: 'Handheld',
     description: '''Spesifikasi:
       -Processor : 
 AMD Ryzen™ Z1 Extreme Processor ("Zen4" architecture with 4nm process, 8-core /16-threads, 24MB total cache, up to 5.10 Ghz boost)
@@ -289,6 +320,7 @@ Microsoft Pluton security processor''',
     price: 7582000.00,
     imageUrl:
         'assets/images/products/Xiaomi Pad 6s Pro 12,4 inch 8GB - 256GB.jpg',
+    category: 'Tablet',
     description: '''Spesifikasi:
 Ukuran: Layar 3K 12,4″, rasio aspek 3:2
 Resolusi: 3048*2032 294 ppi
@@ -342,6 +374,7 @@ Bobot: 590 g''',
     name: 'Samsung - Galaxy Tab S9+ 12/512GB',
     price: 19999000.00,
     imageUrl: 'assets/images/products/Samsung Galaxy Tab S9+ 12GB - 512GB.jpg',
+    category: 'Tablet',
     description: '''Spesifikasi:
 - Processor : Snapdragon 8 Gen 2
 - Size : 326.4 x 208.6 x 5.5 mm
