@@ -306,12 +306,13 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         backgroundColor: const Color(0xFF7C4DFF),
         child: Stack(
+          clipBehavior: Clip.none,
           children: [
             const Icon(Icons.shopping_cart, color: Colors.white),
             if (cart.itemCount > 0)
               Positioned(
-                right: -4,
-                top: -4,
+                right: -8,
+                top: -8,
                 child: Container(
                   padding: const EdgeInsets.all(2),
                   decoration: BoxDecoration(
@@ -319,8 +320,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   constraints: const BoxConstraints(
-                    minWidth: 16,
-                    minHeight: 16,
+                    minWidth: 18,
+                    minHeight: 18,
                   ),
                   child: Text(
                     '${cart.itemCount}',
