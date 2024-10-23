@@ -16,6 +16,10 @@ class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _searchController = TextEditingController();
   List<Product> _filteredProducts = [];
 
+  String _selectedCategory = 'All';
+  RangeValues _priceRange = const RangeValues(0, 20000000);
+  String _sortBy = 'None';
+
   @override
   void initState() {
     super.initState();
@@ -30,12 +34,235 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _onSearchChanged() {
-    String searchTerm = _searchController.text.toLowerCase();
+    _filterProducts();
+  }
+
+  void _filterProducts() {
     setState(() {
       _filteredProducts = sampleProducts.where((product) {
-        return product.name.toLowerCase().contains(searchTerm);
+        // filter pencarian (search)
+        bool matchesSearch = _searchController.text.isEmpty ||
+            product.name
+                .toLowerCase()
+                .contains(_searchController.text.toLowerCase());
+
+        // filter kategori
+        bool matchesCategory =
+            _selectedCategory == 'All' || product.category == _selectedCategory;
+
+        // filter harga
+        bool matchesPrice = product.price >= _priceRange.start &&
+            product.price <= _priceRange.end;
+
+        return matchesSearch && matchesCategory && matchesPrice;
       }).toList();
+
+      // sorting berdasarkan...
+      switch (_sortBy) {
+        case 'Price (Low to High)':
+          _filteredProducts.sort((a, b) => a.price.compareTo(b.price));
+          break;
+        case 'Price (High to Low)':
+          _filteredProducts.sort((a, b) => b.price.compareTo(a.price));
+          break;
+        case 'Name (A to Z)':
+          _filteredProducts.sort((a, b) => a.name.compareTo(b.name));
+          break;
+        case 'Name (Z to A)':
+          _filteredProducts.sort((a, b) => b.name.compareTo(a.name));
+          break;
+      }
     });
+  }
+
+  void _showFilterMenu() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        height: MediaQuery.of(context).size.height * 0.75,
+        decoration: const BoxDecoration(
+          color: Color(0xFFE0C3FC),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        ),
+        child: Column(
+          children: [
+            Container(
+              width: 40,
+              height: 4,
+              margin: const EdgeInsets.symmetric(vertical: 10),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.5),
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Opsi pengurutan
+                    const Text(
+                      'Sort By',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Wrap(
+                      spacing: 8,
+                      children: [
+                        'None',
+                        'Price (Low to High)',
+                        'Price (High to Low)',
+                        'Name (A to Z)',
+                        'Name (Z to A)',
+                      ]
+                          .map((sort) => ChoiceChip(
+                                label: Text(sort),
+                                selected: _sortBy == sort,
+                                onSelected: (selected) {
+                                  setState(() {
+                                    _sortBy = selected ? sort : 'None';
+                                  });
+                                  _filterProducts();
+                                },
+                                selectedColor: Colors.green[200],
+                                backgroundColor: const Color(0xFF7C4DFF),
+                                labelStyle: TextStyle(
+                                  color: _sortBy == sort
+                                      ? Colors.white
+                                      : Colors.white70,
+                                ),
+                              ))
+                          .toList(),
+                    ),
+                    const SizedBox(height: 24),
+                    // filter kategori
+                    const Text(
+                      'Category',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Wrap(
+                      spacing: 8,
+                      children: [
+                        'All',
+                        'Gaming Console',
+                        'Handheld',
+                        'Tablet',
+                      ]
+                          .map((category) => ChoiceChip(
+                                label: Text(category),
+                                selected: _selectedCategory == category,
+                                onSelected: (selected) {
+                                  setState(() {
+                                    _selectedCategory =
+                                        selected ? category : 'All';
+                                  });
+                                  _filterProducts();
+                                },
+                                selectedColor: Colors.green[200],
+                                backgroundColor: const Color(0xFF7C4DFF),
+                                labelStyle: TextStyle(
+                                  color: _selectedCategory == category
+                                      ? Colors.white
+                                      : Colors.white70,
+                                ),
+                              ))
+                          .toList(),
+                    ),
+                    const SizedBox(height: 24),
+                    // urutan berdasarkan harga
+                    const Text(
+                      'Price Range',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    RangeSlider(
+                      values: _priceRange,
+                      min: 0,
+                      max: 20000000,
+                      divisions: 20,
+                      activeColor: const Color(0xFF7C4DFF),
+                      inactiveColor: Colors.white.withOpacity(0.3),
+                      labels: RangeLabels(
+                        'Rp ${(_priceRange.start / 1000000).toStringAsFixed(1)}M',
+                        'Rp ${(_priceRange.end / 1000000).toStringAsFixed(1)}M',
+                      ),
+                      onChanged: (values) {
+                        setState(() {
+                          _priceRange = values;
+                        });
+                        _filterProducts();
+                      },
+                    ),
+                    const SizedBox(height: 24),
+                    // tombol Apply dan Reset
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                _selectedCategory = 'All';
+                                _sortBy = 'None';
+                                _priceRange = const RangeValues(0, 20000000);
+                              });
+                              _filterProducts();
+                              Navigator.pop(context);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.red,
+                              foregroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                            child: const Text('Reset Filters'),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              _filterProducts();
+                              Navigator.pop(context);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF7C4DFF),
+                              foregroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                            child: const Text('Apply'),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   String formatPrice(double price) {
@@ -78,7 +305,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     IconButton(
                       icon: const Icon(Icons.menu, color: Colors.white),
-                      onPressed: () {},
+                      onPressed: _showFilterMenu,
                     ),
                     if (_isSearching)
                       Expanded(
